@@ -44,8 +44,8 @@ int main(int argc, char **argv)
 		return (0);
 	if (argc == 2)
 	{
-		argv = ft_split(argv[1], ' ');
-		if (!check_arg(argv))
+		s = ft_split(argv[1], ' ');
+		if (!check_arg(s))
 			return (0);
 		write(1, "ok\n", 3);
 	}
@@ -54,6 +54,6 @@ int main(int argc, char **argv)
 		if (!check_arg(argv))
 			return (0);
 		write(1, "ok\n", 3);
-	}	
+	}
 //	a = ft_init_stack(argc, argv);
 }

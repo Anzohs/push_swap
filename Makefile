@@ -10,20 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
+LIBFT = libftprintf.a
 NAME = push_swap
-LIB = cd 42_libft && make 
-libft = libft.a
-CP = cp 42_libft/libft.a .
-SRCS = main.c \ functions.c \ stack_fun.c
+lib = cd ft_printf && make
+CP = cp ft_printf/libftprintf.a .
+SRCS = main.c \ double_rrr.c \ double_rr.c \ double_ss.c \ stack_a.c \ stack_b.c
 OBJS = $(SRCS:.c=.o)
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
+
 $(NAME): $(OBJS)
-	$(CP)
-	$(CC) $(CFLAGS) $(OBJS) $(libft) -o $(NAME)
+    $(lib)
+    $(CP)
+    @mv $(LIBFT) $(NAME)
+	ar rcs $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)

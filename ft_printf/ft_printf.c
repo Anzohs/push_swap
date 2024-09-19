@@ -29,7 +29,7 @@ static int	ft_write(char c, va_list *list)
 		return (ft_printf_bases(va_arg(*list, unsigned int), \
 				"0123456789ABCDEF"));
 	if (c == 'u')
-		return (ft_printf_unint(va_arg(*list, unsigned int))); 
+		return (ft_printf_unint(va_arg(*list, unsigned int)));
 	if (c == 'p')
 		return (ft_printf_adr(va_arg(*list, void *), "0123456789abcdef"));
 	return (0);

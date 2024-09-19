@@ -30,7 +30,7 @@ int	ft_printf_bases(unsigned long c, char *bases)
 	while (c >= 16)
 	{
 		c /= 16;
-		count++; 
+		count++;
 	}
 	return (count + 1);
 }

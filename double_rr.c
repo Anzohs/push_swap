@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-static void ra_1(t_stack **stack)
+static void	ra_1(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack || !(*stack)->next)
 		return ;
@@ -27,7 +27,7 @@ static void ra_1(t_stack **stack)
 	*stack = tmp;
 }
 
-void rr(t_stack **stack_a, t_stack **stack_b)
+void	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	ra_1(stack_a);
 	ra_1(stack_b);

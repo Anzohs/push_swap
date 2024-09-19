@@ -10,27 +10,34 @@
 #                                                                              #
 # **************************************************************************** #
 
-LIBFT = libftprintf.a
-NAME = push_swap
+LIBFT = cp ft_printf/libftprintf.a .
 lib = cd ft_printf && make
-CP = cp ft_printf/libftprintf.a .
-SRCS = main.c \ double_rrr.c \ double_rr.c \ double_ss.c \ stack_a.c \ stack_b.c
+liib = libftprintf.a
+
+SRCS = main.c  double_rrr.c  double_rr.c double_ss.c \
+		stack_a.c stack_b.c ft_init.c
+
 OBJS = $(SRCS:.c=.o)
+
+CP = cp
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
+NAME = push_swap
 
-all: $(NAME)
+all:
+	$(lib)
+	$(LIBFT)
+	@make start
 
-$(NAME): $(OBJS)
-    $(lib)
-    $(CP)
-    @mv $(LIBFT) $(NAME)
-	ar rcs $(NAME) $(OBJS)
+start: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(liib) -o $(NAME)
 
 clean:
 	$(RM) $(OBJS)
-	$(LIB) clean
+	$(lib) clean
 fclean: clean
-	$(RM) $(NAME) $(libft)
-	$(LIB) fclean
+	$(RM) $(NAME) $(liib)
+	$(lib) fclean

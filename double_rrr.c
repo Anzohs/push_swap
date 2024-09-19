@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void 	rra_1(t_stack **stack)
+static void	rra_1(t_stack **stack)
 {
 	t_stack	*tmp;
 
@@ -30,5 +30,5 @@ void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	rra_1(stack_a);
 	rra_1(stack_b);
-	ft_putstr_fd("rrr\n",1);
+	ft_putstr_fd("rrr\n", 1);
 }

@@ -32,6 +32,8 @@ static int	count_words(const char *s, char c)
 			result++;
 		i++;
 	}
+	if (s[0] && s[0] != c && !result)
+		return 1;
 	return (result);
 }
 

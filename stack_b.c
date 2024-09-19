@@ -14,7 +14,7 @@
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack_a)
 		return ;
@@ -25,10 +25,9 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	ft_putstr_fd("pb\n", 1);
 }
 
-
 void	sb(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack || !(*stack)->next)
 		return ;
@@ -41,7 +40,7 @@ void	sb(t_stack **stack)
 
 void	rb(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack || !(*stack)->next)
 		return ;
@@ -58,7 +57,7 @@ void	rb(t_stack **stack)
 
 void	rrb(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack || !(*stack)->next)
 		return ;

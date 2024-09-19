@@ -14,7 +14,7 @@
 
 void	pa(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack_b)
 		return ;
@@ -27,7 +27,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 
 void	sa(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack || !(*stack)->next)
 		return ;
@@ -40,7 +40,7 @@ void	sa(t_stack **stack)
 
 void	ra(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack || !(*stack)->next)
 		return ;
@@ -57,7 +57,7 @@ void	ra(t_stack **stack)
 
 void	rra(t_stack **stack)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!*stack || !(*stack)->next)
 		return ;

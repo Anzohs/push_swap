@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
+#include "ft_printf/libft/libft.h"
 #include "push_swap.h"
 
 static t_stack	*ft_last(t_stack *stack)

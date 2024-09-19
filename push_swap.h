@@ -15,22 +15,24 @@
 
 # include "ft_printf/ft_printf.h"
 # include <stdio.h>
+
 typedef struct s_stack
 {
 	struct s_stack		*next;
-	int			value;
+	long				value;
 }				t_stack;
 
-void sa(t_stack **stack);
-void sb(t_stack **stack);
-void ss(t_stack **stack, t_stack **stack2);
-void pa(t_stack **stack, t_stack **stack2);
-void pb(t_stack **stack, t_stack **stack2);
-void ra(t_stack **stack);
-void rb(t_stack **stack);
-void rr(t_stack **stack, t_stack **stack2);
-void rra(t_stack **stack);
-void rrb(t_stack **stack);
-void rrr(t_stack **stack, t_stack **stack2);
+void	sa(t_stack **stack);
+void	sb(t_stack **stack);
+void	ss(t_stack **stack, t_stack **stack2);
+void	pa(t_stack **stack, t_stack **stack2);
+void	pb(t_stack **stack, t_stack **stack2);
+void	ra(t_stack **stack);
+void	rb(t_stack **stack);
+void	rr(t_stack **stack, t_stack **stack2);
+void	rra(t_stack **stack);
+void	rrb(t_stack **stack);
+void	rrr(t_stack **stack, t_stack **stack2);
+void	ft_init_stack(t_stack **stack, char **s);
 
 #endif

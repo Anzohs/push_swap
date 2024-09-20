@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "ft_printf/ft_printf.h"
-# include <stdio.h>
+# include <limits.h>
 
 typedef struct s_stack
 {
@@ -34,5 +34,7 @@ void	rra(t_stack **stack);
 void	rrb(t_stack **stack);
 void	rrr(t_stack **stack, t_stack **stack2);
 void	ft_init_stack(t_stack **stack, char **s);
+int		stack_len(t_stack **stack);
+int		is_valid(t_stack **stack);
 
 #endif

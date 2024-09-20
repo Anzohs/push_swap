@@ -37,6 +37,29 @@ static void	ft_stack_free(t_stack *s)
 	free(s);
 }
 
+static void	same_value(char **s)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (s[i])
+	{
+		j = i + 1;
+		while (s[j])
+		{
+			if (ft_atoi(s[i]) == ft_atoi(s[j]))
+			{
+				ft_putstr_fd("Error\n", 2);
+				ft_free(s);
+				exit(1);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 static int	check_arg(char **s, int argc)
 {
 	int	i;
@@ -46,6 +69,7 @@ static int	check_arg(char **s, int argc)
 		i = 0;
 	else
 		i = 1;
+	same_value(s);
 	while (s[i])
 	{
 		j = 0;
@@ -69,7 +93,6 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 
 	a = NULL;
-	ft_bzero(a, sizeof(t_stack));
 	if (argc < 2)
 		return (0);
 	if (argc == 2)
@@ -79,7 +102,9 @@ int	main(int argc, char **argv)
 			return (0);
 		ft_init_stack(&a, s);
 		ft_free(s);
-		ft_stack_free(a);
+		if (!is_valid(&a))
+			ft_stack_free(a);
+		return (0);
 	}
 	else
 	{

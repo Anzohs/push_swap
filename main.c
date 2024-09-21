@@ -65,7 +65,6 @@ static void	same_value(char **s, int argc)
 		j = i;
 		while (s[++j])
 		{
-			//alterar o ft_atoi
 			if (ft_atoi(s[i]) == ft_atoi(s[j]))
 			{
 				ft_putstr_fd("Error\n", 2);

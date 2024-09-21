@@ -15,7 +15,7 @@ lib = cd ft_printf && make
 liib = libftprintf.a
 
 SRCS = main.c  double_rrr.c  double_rr.c double_ss.c \
-		stack_a.c stack_b.c ft_init.c ft_sort.c
+		stack_a.c stack_b.c ft_init.c ft_sort.c ft_stack.c
 
 OBJS = $(SRCS:.c=.o)
 

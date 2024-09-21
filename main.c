@@ -22,6 +22,28 @@ static void	ft_free(char **s)
 	free(s);
 }
 
+static int	str_len(char *s)
+{
+	int	len;
+	int	l;
+
+	len = 0;
+	l = 0;
+
+	while (*s)
+	{
+		if (!l && !(*s >= '1' && *s <= '9'))
+			s++;
+		else
+		{
+			l++;
+			s++;
+			len++;
+		}
+	}
+	return (len);
+}
+
 static void	same_value(char **s, int argc)
 {
 	int	i;
@@ -59,11 +81,24 @@ static int	check_arg(char **s, int argc)
 {
 	int	i;
 	int	j;
+	int k;
 
 	if (argc == 2)
 		i = 0;
 	else
 		i = 1;
+	k = i;
+	while (s[k])
+	{
+		if (str_len(s[k]) > 10)
+		{
+			if (argc == 2)
+				ft_free(s);
+			ft_putstr_fd("Error\n", 2);
+			return (0);
+		}
+		k++;
+	}
 	same_value(s, argc);
 	while (s[i])
 	{

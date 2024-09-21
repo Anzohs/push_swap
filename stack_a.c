@@ -41,17 +41,17 @@ void	sa(t_stack **stack)
 void	ra(t_stack **stack)
 {
 	t_stack	*tmp;
+	t_stack	*f;
 
 	if (!*stack || !(*stack)->next)
 		return ;
 	tmp = *stack;
+	f = (*stack)->next;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = *stack;
-	while ((*stack)->next != tmp)
-		*stack = (*stack)->next;
 	(*stack)->next = NULL;
-	*stack = tmp;
+	*stack = f;
 	ft_putstr_fd("ra\n", 1);
 }
 

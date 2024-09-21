@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 
 static void	ft_free(char **s)
@@ -23,40 +22,36 @@ static void	ft_free(char **s)
 	free(s);
 }
 
-static void	ft_stack_free(t_stack *s)
-{
-	t_stack	*tmp;
-
-	tmp = s;
-	while (s->next)
-	{
-		s = s->next;
-		free(tmp);
-		tmp = s;
-	}
-	free(s);
-}
-
-static void	same_value(char **s)
+static void	same_value(char **s, int argc)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (s[i])
+	if (argc == 2)
+		i = -1;
+	else
+		i = 0;
+	if (!*s || !s)
 	{
-		j = i + 1;
-		while (s[j])
+		if (s && argc == 2)
+			ft_free(s);
+		ft_putstr_fd("Error\n", 2);
+		exit(0);
+	}
+	while (s[++i])
+	{
+		j = i;
+		while (s[++j])
 		{
+			//alterar o ft_atoi
 			if (ft_atoi(s[i]) == ft_atoi(s[j]))
 			{
 				ft_putstr_fd("Error\n", 2);
-				ft_free(s);
+				if (argc == 2)
+					ft_free(s);
 				exit(1);
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -69,14 +64,23 @@ static int	check_arg(char **s, int argc)
 		i = 0;
 	else
 		i = 1;
-	same_value(s);
+	same_value(s, argc);
 	while (s[i])
 	{
 		j = 0;
 		while (s[i][j])
 		{
-			if (!ft_isdigit(s[i][j]) && s[i][j] != '-')
+			if (j != 0 && (s[i][j] == '-' || s[i][j] == '+'))
 			{
+				if (argc == 2)
+					ft_free(s);
+				ft_putstr_fd("Error\n", 2);
+				return (0);
+			}
+			if (!ft_isdigit(s[i][j]) && s[i][j] != '-' && s[i][j] != '+')
+			{
+				if (argc == 2)
+					ft_free(s);
 				ft_putstr_fd("Error\n", 2);
 				return (0);
 			}
@@ -86,6 +90,23 @@ static int	check_arg(char **s, int argc)
 	}
 	return (1);
 }
+
+void	ft_stack_free(t_stack *s)
+{
+	t_stack	*tmp;
+
+	tmp = s;
+	while (s->next)
+	{
+		s = s->next;
+		free(tmp);
+		tmp = s;
+	}
+	if (s)
+		free(s);
+	s = NULL;
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -100,16 +121,14 @@ int	main(int argc, char **argv)
 		s = ft_split(argv[1], ' ');
 		if (!check_arg(s, argc))
 			return (0);
-		ft_init_stack(&a, s);
+		ft_init_stack(&a, s, argc);
 		ft_free(s);
-		if (!is_valid(&a))
-			ft_stack_free(a);
-		return (0);
 	}
 	else
 	{
 		if (!check_arg(argv, argc))
 			return (0);
+		ft_init_stack(&a, argv, argc);
 	}
 	return (1);
 }

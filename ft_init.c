@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
 #include "push_swap.h"
-#include <stdio.h>
 
 static t_stack	*ft_last(t_stack *stack)
 {
@@ -61,7 +59,6 @@ int	is_valid(t_stack **stack)
 	tmp = *stack;
 	while (tmp)
 	{
-		printf("value = %ld\n", tmp->value);
 		if (tmp->value > INT_MAX || tmp->value < INT_MIN)
 		{
 			ft_putstr_fd("Error\n", 2);
@@ -72,11 +69,21 @@ int	is_valid(t_stack **stack)
 	return (1);
 }
 
-void	ft_init_stack(t_stack **stack, char **s)
+void	ft_init_stack(t_stack **stack, char **s, int argv)
 {
 	int	i;
 
-	i = 0;
+	if (argv == 2)
+		i = 0;
+	else
+		i = 1;
 	while (s[i])
 		add_node(stack, ft_atoi(s[i++]));
+	if (!is_valid(stack))
+	{
+		ft_stack_free(*stack);
+		ft_putstr_fd("Error\n", 2);
+		return ;
+	}
+	sort(stack);
 }

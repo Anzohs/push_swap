@@ -33,7 +33,10 @@ void	rr(t_stack **stack, t_stack **stack2);
 void	rra(t_stack **stack);
 void	rrb(t_stack **stack);
 void	rrr(t_stack **stack, t_stack **stack2);
-void	ft_init_stack(t_stack **stack, char **s);
+void	ft_init_stack(t_stack **stack, char **s, int argc);
+void	ft_stack_free(t_stack *s);
+void	sort(t_stack **stack);
+void	sort_stack(t_stack **a, t_stack **b, int size);
 int		stack_len(t_stack **stack);
 int		is_valid(t_stack **stack);
 

@@ -125,23 +125,6 @@ static int	check_arg(char **s, int argc)
 	return (1);
 }
 
-void	ft_stack_free(t_stack *s)
-{
-	t_stack	*tmp;
-
-	tmp = s;
-	while (s->next)
-	{
-		s = s->next;
-		free(tmp);
-		tmp = s;
-	}
-	if (s)
-		free(s);
-	s = NULL;
-}
-
-
 int	main(int argc, char **argv)
 {
 	char	**s;

@@ -51,3 +51,19 @@ void	add_node(t_stack **stack, int i)
 	else
 		ft_last(*stack)->next = s;
 }
+
+void	ft_stack_free(t_stack *s)
+{
+	t_stack	*tmp;
+
+	tmp = s;
+	while (s->next)
+	{
+		s = s->next;
+		free(tmp);
+		tmp = s;
+	}
+	if (s)
+		free(s);
+	s = NULL;
+}

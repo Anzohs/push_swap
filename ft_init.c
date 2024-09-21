@@ -39,6 +39,14 @@ void	ft_init_stack(t_stack **stack, char **s, int argv)
 		i = 1;
 	while (s[i])
 		add_node(stack, ft_atoi(s[i++]));
+	if (argv > 2)
+	{
+		if (stack_len(stack) != argv -1)
+		{
+			ft_putstr_fd("Error\n", 2);
+			ft_stack_free(*stack);
+		}
+	}
 	if (!is_valid(stack))
 	{
 		ft_stack_free(*stack);

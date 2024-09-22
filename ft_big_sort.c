@@ -13,52 +13,49 @@
 #include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 
-static int	smallest_num(t_stack **a)
+static int	radix(t_stack **a)
 {
-	t_stack *tmp = *a;
-    int smallest = tmp->value;
-    int pos = 0;
-    int count = 0;
+	int		value;
+	int		bits;
+	t_stack	*tmp;
 
-    while (tmp)
-    {
-        if (tmp->value < smallest)
-        {
-            smallest = tmp->value;
-            pos = count;
-        }
-        tmp = tmp->next;
-        count++;
-    }
-    return pos;
+	value = (*a)->value;
+	bits = 0;
+	tmp = *a;
+	while (tmp)
+	{
+		if (tmp->value > value)
+			value = tmp->value;
+		tmp = tmp->next;
+	}
+	while ((value >> bits) != 0)
+		bits++;
+	return (bits);
 }
 
 void	ft_big_sort(t_stack **a, t_stack **b)
 {
-	int pos;
+	int bits;
+	int i;
+	int j;
+	int stack_size;
 
-    while (*a)
+	i = 0;
+	j = 0;
+	bits = radix(a);
+	stack_size = stack_len(a);
+    while (i < bits)
     {
-        pos = smallest_num(a);
-        if (pos <= stack_len(a) / 2)
-        {
-            while (pos > 0)
-            {
-                ra(a);
-                pos--;
-            }
-        }
-        else
-        {
-            while (pos < stack_len(a))
-            {
-                rra(a);
-                pos++;
-            }
-        }
-        pb(a, b);
+    	while (j < stack_size)
+     	{
+			if (((*a)->value >> i) & 1)
+				ra(a);
+			else
+				pb(a, b);
+			j++;
+		}
+		i++;
     }
-
     while (*b)
     {
         pa(a, b);

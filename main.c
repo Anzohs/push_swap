@@ -17,8 +17,10 @@ static void	str_check(char **s, int argc)
 {
 	int	i;
 
-	if (!s)
+	if (!s || !*s)
 	{
+		if (s)
+			ft_free(s);
 		ft_putstr_fd("Error\n", 2);
 		exit(0);
 	}
@@ -54,14 +56,13 @@ static void	same_value(char **s, int argc, int i)
 					ft_free(s);
 				exit(1);
 			}
-			if (ft_atol(s[i]) > INT_MAX || ft_atol(s[i]) < INT_MIN)
-			{
-				ft_putstr_fd("Error\n", 2);
-				ft_putstr_fd("Error\n", 2);
-				if (argc == 2)
-					ft_free(s);
-				exit(0);
-			}
+		}
+		if (ft_atol(s[i]) > INT_MAX || ft_atol(s[i]) < INT_MIN)
+		{
+			if (argc == 2)
+				ft_free(s);
+			exit(0);
+			ft_putstr_fd("Error\n", 2);
 		}
 	}
 }
@@ -130,3 +131,5 @@ int	main(int argc, char **argv)
 	}
 	return (1);
 }
+
+//ARG=$(seq -99999 99999 | shuf -n 5); valgrind ./push_swap $ARG | ./checker_linux $ARG

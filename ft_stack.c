@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static t_stack	*ft_last(t_stack *stack)
+t_stack	*ft_last(t_stack *stack)
 {
 	t_stack	*tmp;
 

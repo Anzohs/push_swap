@@ -12,21 +12,14 @@
 
 #include "push_swap.h"
 
-int	is_valid(t_stack **stack)
+static int	split_len(char **s)
 {
-	t_stack	*tmp;
+	int	i;
 
-	tmp = *stack;
-	while (tmp)
-	{
-		if (tmp->value > INT_MAX || tmp->value < INT_MIN)
-		{
-			ft_putstr_fd("Error\n", 2);
-			return (0);
-		}
-		tmp = tmp->next;
-	}
-	return (1);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 void	ft_init_stack(t_stack **stack, char **s, int argv)
@@ -38,20 +31,24 @@ void	ft_init_stack(t_stack **stack, char **s, int argv)
 	else
 		i = 1;
 	while (s[i])
-		add_node(stack, ft_atoi(s[i++]));
+		add_node(stack, (int)ft_atol(s[i++]));
 	if (argv > 2)
 	{
-		if (stack_len(stack) != argv -1)
+		if (stack_len(stack) != argv - 1)
 		{
 			ft_putstr_fd("Error\n", 2);
 			ft_stack_free(*stack);
+			return ;
 		}
 	}
-	if (!is_valid(stack))
+	else
 	{
-		ft_stack_free(*stack);
-		ft_putstr_fd("Error\n", 2);
-		return ;
+		if (stack_len(stack) != split_len(s))
+		{
+			ft_stack_free(*stack);
+			ft_putstr_fd("Error\n", 2);
+			return ;
+		}
 	}
 	sort(stack);
 }

@@ -19,9 +19,10 @@
 typedef struct s_stack
 {
 	struct s_stack		*next;
-	long				value;
+	int					value;
 }				t_stack;
 
+t_stack	*ft_last(t_stack *stack);
 void	sa(t_stack **stack);
 void	sb(t_stack **stack);
 void	ss(t_stack **stack, t_stack **stack2);
@@ -38,7 +39,9 @@ void	ft_stack_free(t_stack *s);
 void	sort(t_stack **stack);
 void	sort_stack(t_stack **a, t_stack **b, int size);
 void	add_node(t_stack **stack, int i);
+void	ft_free(char **s);
 int		stack_len(t_stack **stack);
-int		is_valid(t_stack **stack);
+int		str_len(char *s);
+long	ft_atol(char *npt);
 
 #endif

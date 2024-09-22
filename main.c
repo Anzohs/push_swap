@@ -10,119 +10,100 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf/libft/libft.h"
 #include "push_swap.h"
 
-static void	ft_free(char **s)
+static void	str_check(char **s, int argc)
 {
 	int	i;
 
-	i = 0;
-	while (s[i])
-		free(s[i++]);
-	free(s);
-}
-
-static int	str_len(char *s)
-{
-	int	len;
-	int	l;
-
-	len = 0;
-	l = 0;
-
-	while (*s)
+	if (!s)
 	{
-		if (!l && !(*s >= '1' && *s <= '9'))
-			s++;
-		else
-		{
-			l++;
-			s++;
-			len++;
-		}
+		ft_putstr_fd("Error\n", 2);
+		exit(0);
 	}
-	return (len);
-}
-
-static void	same_value(char **s, int argc)
-{
-	int	i;
-	int	j;
-
 	if (argc == 2)
 		i = -1;
 	else
 		i = 0;
-	if (!*s || !s)
+	while (s[++i])
 	{
-		if (s && argc == 2)
-			ft_free(s);
-		ft_putstr_fd("Error\n", 2);
-		exit(0);
+		if (str_len(s[i]) > 10)
+		{
+			if (argc == 2)
+				ft_free(s);
+			ft_putstr_fd("Error\n", 2);
+			exit(0);
+		}
 	}
+}
+
+static void	same_value(char **s, int argc, int i)
+{
+	int	j;
+
 	while (s[++i])
 	{
 		j = i;
 		while (s[++j])
 		{
-			if (ft_atoi(s[i]) == ft_atoi(s[j]))
+			if (ft_atol(s[i]) == ft_atol(s[j]))
 			{
 				ft_putstr_fd("Error\n", 2);
 				if (argc == 2)
 					ft_free(s);
 				exit(1);
 			}
+			if (ft_atol(s[i]) > INT_MAX || ft_atol(s[i]) < INT_MIN)
+			{
+				ft_putstr_fd("Error\n", 2);
+				ft_putstr_fd("Error\n", 2);
+				if (argc == 2)
+					ft_free(s);
+				exit(0);
+			}
 		}
 	}
 }
 
-static int	check_arg(char **s, int argc)
+static void	valid_arg(char **s, int argc, int i)
 {
-	int	i;
 	int	j;
-	int k;
 
-	if (argc == 2)
-		i = 0;
-	else
-		i = 1;
-	k = i;
-	while (s[k])
+	while (s[++i])
 	{
-		if (str_len(s[k]) > 10)
-		{
-			if (argc == 2)
-				ft_free(s);
-			ft_putstr_fd("Error\n", 2);
-			return (0);
-		}
-		k++;
-	}
-	same_value(s, argc);
-	while (s[i])
-	{
-		j = 0;
-		while (s[i][j])
+		j = -1;
+		while (s[i][++j])
 		{
 			if (j != 0 && (s[i][j] == '-' || s[i][j] == '+'))
 			{
 				if (argc == 2)
 					ft_free(s);
 				ft_putstr_fd("Error\n", 2);
-				return (0);
+				exit(0);
 			}
 			if (!ft_isdigit(s[i][j]) && s[i][j] != '-' && s[i][j] != '+')
 			{
 				if (argc == 2)
 					ft_free(s);
 				ft_putstr_fd("Error\n", 2);
-				return (0);
+				exit(0);
 			}
-			j++;
 		}
-		i++;
 	}
-	return (1);
+}
+
+static void	check_arg(char **s, int argc)
+{
+	int	i;
+
+	if (argc == 2)
+		i = 0;
+	else
+		i = 1;
+	str_check(s, argc);
+	same_value(s, argc, i - 1);
+	valid_arg(s, argc, i - 1);
 }
 
 int	main(int argc, char **argv)
@@ -136,15 +117,15 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		s = ft_split(argv[1], ' ');
-		if (!check_arg(s, argc))
-			return (0);
+		if (!s)
+			return (1);
+		check_arg(s, argc);
 		ft_init_stack(&a, s, argc);
 		ft_free(s);
 	}
 	else
 	{
-		if (!check_arg(argv, argc))
-			return (0);
+		check_arg(argv, argc);
 		ft_init_stack(&a, argv, argc);
 	}
 	return (1);

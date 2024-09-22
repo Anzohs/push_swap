@@ -89,7 +89,7 @@ static void	sort_tree(t_stack **a)
 void	sort_stack(t_stack **a, t_stack **b, int size)
 {
 	if (size > 5)
-		exit(0);
+		ft_big_sort(a, b);
 	if (size == 5)
 		ft_sort_five(a, b);
 	if (size == 4)

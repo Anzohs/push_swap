@@ -36,6 +36,7 @@ void	rrb(t_stack **stack);
 void	rrr(t_stack **stack, t_stack **stack2);
 void	ft_init_stack(t_stack **stack, char **s, int argc);
 void	ft_stack_free(t_stack *s);
+void	ft_big_sort(t_stack **a, t_stack **b);
 void	sort(t_stack **stack);
 void	sort_stack(t_stack **a, t_stack **b, int size);
 void	ft_sort_five(t_stack **a, t_stack **b);

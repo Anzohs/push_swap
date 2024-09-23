@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	split_len(char **s)
+int	split_len(char **s)
 {
 	int	i;
 
@@ -20,6 +20,17 @@ static int	split_len(char **s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+static int	len_check(t_stack **a, int argc)
+{
+	if (stack_len(a) != argc)
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_stack_free(*a);
+		return (0);
+	}
+	return (1);
 }
 
 void	ft_init_stack(t_stack **stack, char **s, int argv)
@@ -31,24 +42,18 @@ void	ft_init_stack(t_stack **stack, char **s, int argv)
 	else
 		i = 1;
 	while (s[i])
+	{
 		add_node(stack, (int)ft_atol(s[i++]));
+	}
 	if (argv > 2)
 	{
-		if (stack_len(stack) != argv - 1)
-		{
-			ft_putstr_fd("Error\n", 2);
-			ft_stack_free(*stack);
+		if (!len_check(stack, argv -1))
 			return ;
-		}
 	}
 	else
 	{
-		if (stack_len(stack) != split_len(s))
-		{
-			ft_stack_free(*stack);
-			ft_putstr_fd("Error\n", 2);
+		if (!len_check(stack, split_len(s)))
 			return ;
-		}
 	}
 	sort(stack);
 }

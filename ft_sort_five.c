@@ -10,53 +10,83 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 
-static void	helper(t_stack **a, t_stack **b)
+static int	helper(t_stack **a)
 {
-	if ((*b)->value > (*a)->next->value && \
-		(*b)->value < (*a)->next->next->value)
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *a;
+	i = tmp->value;
+	while (tmp)
 	{
-		ra(a);
-		ra(a);
-		pa(a, b);
-		rra(a);
-		rra(a);
+		if (tmp->value < i)
+			i = tmp->value;
+		tmp = tmp->next;
 	}
-	else
-	{
-		rra(a);
-		rra(a);
-		pa(a, b);
-		ra(a);
-		ra(a);
-	}
+	return (i);
 }
 
-static	void	five_sorte(t_stack **a, t_stack **b)
+static int	five_sorte(t_stack **a, int num)
 {
-	if ((*b)->value > (*a)->value && (*b)->value < (*a)->next->value)
+	t_stack	*t;
+	int		i;
+
+	t = *a;
+	i = 1;
+	while (t->value != num && t)
 	{
-		ra(a);
-		pa(a, b);
-		rra(a);
+		t = t->next;
+		i++;
 	}
-	else if ((*b)->value > ft_last(*a)->value)
-	{
-		pa(a, b);
-		ra(a);
-	}
-	else
-		helper(a, b);
+	return (i);
 }
 
 void	ft_sort_five(t_stack **a, t_stack **b)
 {
-	pb(a, b);
-	pb(a, b);
-	if ((*b)->value > (*b)->next->value)
-		sb(b);
-	sort_stack(a, NULL, stack_len(a));
-	sort_stack(a, b, stack_len(a) + 1);
-	five_sorte(a, b);
+	while (stack_len(a) >= 4)
+	{
+		if (five_sorte(a, helper(a)) == 1)
+			pb(a, b);
+		else if (five_sorte(a, helper(a)) > 3)
+		{
+			while (five_sorte(a, helper(a)) != 1)
+			{
+				rra(a);
+			}
+		}
+		else
+		{
+			while (five_sorte(a, helper(a)) != 1)
+				ra(a);
+		}
+	}
+	if (!is_sorted(a))
+		sort_stack(a, NULL, 3);
+	pa(a, b);
+	pa(a, b);
+}
+
+void	ft_index(t_stack **a)
+{
+	t_stack	*tmp;
+	int		i;
+	int		len;
+
+	tmp = *a;
+	len = stack_len(a);
+	i = 1;
+	while (len)
+	{
+		while (tmp)
+		{
+			if (tmp->value == min_num(a))
+				tmp->index = i++;
+			tmp = tmp->next;
+		}
+		len--;
+		tmp = *a;
+	}
 }

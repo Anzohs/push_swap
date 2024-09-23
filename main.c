@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/libft/libft.h"
+#include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 
 static void	str_check(char **s, int argc)
@@ -56,13 +56,13 @@ static void	same_value(char **s, int argc, int i)
 					ft_free(s);
 				exit(1);
 			}
-		}
-		if (ft_atol(s[i]) > INT_MAX || ft_atol(s[i]) < INT_MIN)
-		{
-			if (argc == 2)
-				ft_free(s);
-			exit(0);
-			ft_putstr_fd("Error\n", 2);
+			if (ft_atol(s[j]) > INT_MAX || ft_atol(s[j]) < INT_MIN)
+			{
+				if (argc == 2)
+					ft_free(s);
+				ft_putstr_fd("Error\n", 2);
+				exit(1);
+			}
 		}
 	}
 }
@@ -81,14 +81,14 @@ static void	valid_arg(char **s, int argc, int i)
 				if (argc == 2)
 					ft_free(s);
 				ft_putstr_fd("Error\n", 2);
-				exit(0);
+				exit(1);
 			}
 			if (!ft_isdigit(s[i][j]) && s[i][j] != '-' && s[i][j] != '+')
 			{
 				if (argc == 2)
 					ft_free(s);
 				ft_putstr_fd("Error\n", 2);
-				exit(0);
+				exit(1);
 			}
 		}
 	}
@@ -131,5 +131,3 @@ int	main(int argc, char **argv)
 	}
 	return (1);
 }
-
-//ARG=$(seq -99999 99999 | shuf -n 5); valgrind ./push_swap $ARG | ./checker_linux $ARG

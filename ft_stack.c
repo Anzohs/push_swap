@@ -22,6 +22,31 @@ t_stack	*ft_last(t_stack *stack)
 	return (tmp);
 }
 
+int	min_num(t_stack **stack)
+{
+	t_stack	*tmp;
+	int		num;
+
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->index == 0)
+		{
+			num = tmp->value;
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->value < num && tmp->index == 0)
+			num = tmp->value;
+		tmp = tmp->next;
+	}
+	return (num);
+}
+
 int	stack_len(t_stack **stack)
 {
 	t_stack	*tmp;
@@ -46,6 +71,7 @@ void	add_node(t_stack **stack, int i)
 		return ;
 	s->value = i;
 	s->next = NULL;
+	s->index = 0;
 	if (!*stack)
 		*stack = s;
 	else

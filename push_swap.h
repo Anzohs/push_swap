@@ -20,6 +20,7 @@ typedef struct s_stack
 {
 	struct s_stack		*next;
 	int					value;
+	int					index;
 }				t_stack;
 
 t_stack	*ft_last(t_stack *stack);
@@ -42,6 +43,10 @@ void	sort_stack(t_stack **a, t_stack **b, int size);
 void	ft_sort_five(t_stack **a, t_stack **b);
 void	add_node(t_stack **stack, int i);
 void	ft_free(char **s);
+void	ft_index(t_stack **a);
+int		split_len(char **s);
+int		is_sorted(t_stack **stack);
+int		min_num(t_stack **stack);
 int		stack_len(t_stack **stack);
 int		str_len(char *s);
 long	ft_atol(char *npt);

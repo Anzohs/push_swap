@@ -10,26 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 
 static void	sort_tree(t_stack **a);
-
-static int	is_sorted(t_stack **stack)
-{
-	t_stack	*tmp;
-
-	tmp = *stack;
-	if (!tmp)
-		return (0);
-	while (tmp->next)
-	{
-		if (tmp->value > tmp->next->value)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
 
 static void	sort_four(t_stack **a, t_stack **b)
 {
@@ -86,10 +69,29 @@ static void	sort_tree(t_stack **a)
 	}
 }
 
+int	is_sorted(t_stack **stack)
+{
+	t_stack	*tmp;
+
+	tmp = *stack;
+	if (!tmp)
+		return (0);
+	while (tmp->next)
+	{
+		if (tmp->value > tmp->next->value)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 void	sort_stack(t_stack **a, t_stack **b, int size)
 {
 	if (size > 5)
+	{
+		ft_index(a);
 		ft_big_sort(a, b);
+	}
 	if (size == 5)
 		ft_sort_five(a, b);
 	if (size == 4)
